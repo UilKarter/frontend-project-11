@@ -1,9 +1,10 @@
 import { proxy } from 'valtio/vanilla'
 
 export default proxy({
-  form: {
-    state: 'filling',
-    error: null,
+  process: {
+    phase: 'filling',
+    errorCode: null,
   },
   feeds: [],
+  posts: [],
 })

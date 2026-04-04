@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './style.css'
 
 import i18next from 'i18next'
 import state from './state.js'
-import app from './app.js'
 import view from './view.js'
+import createApp from './app.js'
 import resources from './locales.js'
 
 const elements = {
@@ -23,7 +24,7 @@ const init = () => {
   }).then(() => {
     view(state, elements, i18n)
 
-    const { handleSubmit } = app()
+    const { handleSubmit } = createApp() // ← ОБЯЗАТЕЛЬНО
 
     elements.form.addEventListener('submit', (e) => {
       e.preventDefault()

@@ -6,8 +6,10 @@ export default {
       },
       errors: {
         required: 'Не должно быть пустым',
-        invalidUrl: 'Ссылка должна быть валидным URL',
+        invalid: 'Ссылка должна быть валидным URL',
         duplicate: 'RSS уже существует',
+        network: 'Ошибка сети. Проверьте соединение',
+        parseError: 'Ресурс не содержит валидный RSS',
         unknown: 'Неизвестная ошибка',
       },
     },

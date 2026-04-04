@@ -6,13 +6,15 @@ yup.setLocale({
     notOneOf: 'errors.duplicate',
   },
   string: {
-    url: 'errors.invalidUrl',
+    url: 'errors.invalid',
   },
 })
 
-export const buildUrlSchema = existingUrls => (
+const buildSchema = exUrls => (
   yup.string()
     .required()
     .url()
-    .notOneOf(existingUrls)
+    .notOneOf(exUrls)
 )
+
+export default buildSchema
