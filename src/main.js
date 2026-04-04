@@ -24,7 +24,7 @@ const init = () => {
   }).then(() => {
     view(state, elements, i18n)
 
-    const { handleSubmit } = createApp() // ← ОБЯЗАТЕЛЬНО
+    const { handleSubmit } = createApp()
 
     elements.form.addEventListener('submit', (e) => {
       e.preventDefault()

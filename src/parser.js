@@ -1,4 +1,4 @@
-const parseRss = (xmlString) => {
+const parser = (xmlString) => {
   const parser = new DOMParser()
   const doc = parser.parseFromString(xmlString, 'text/xml')
   const parseError = doc.querySelector('parsererror')
@@ -30,4 +30,4 @@ const parseRss = (xmlString) => {
   }
 }
 
-export default parseRss
+export default parser
