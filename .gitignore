@@ -2,10 +2,3 @@ node_modules/
 coverage/
 dist/
 dist-ssr/
-
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/

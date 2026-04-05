@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import './style.css'
-
 import i18next from 'i18next'
 import state from './utils/state.js'
 import view from './view.js'
