@@ -13,7 +13,7 @@ const getFeedItem = (feed) => {
   return item
 }
 
-const getPostItem = (post, isViewed) => {
+const getPostItem = (post, isViewed, i18n) => {
   const item = document.createElement('li')
   item.classList.add(
     'list-group-item',
@@ -39,7 +39,7 @@ const getPostItem = (post, isViewed) => {
   const button = document.createElement('button')
   button.type = 'button'
   button.classList.add('btn', 'btn-outline-primary', 'btn-sm')
-  button.textContent = 'Просмотр'
+  button.textContent = i18n.t('posts.button')
   button.dataset.id = post.id
   button.setAttribute('data-bs-toggle', 'modal')
   button.setAttribute('data-bs-target', '#modal')
@@ -47,12 +47,12 @@ const getPostItem = (post, isViewed) => {
   return item
 }
 
-const renderFeeds = (container, feeds) => {
+const renderFeeds = (container, feeds, i18n) => {
   container.innerHTML = ''
   if (feeds.length === 0) return
   const title = document.createElement('h2')
   title.classList.add('mb-4')
-  title.textContent = 'Фиды'
+  title.textContent = i18n.t('feeds.title')
   const list = document.createElement('ul')
   list.classList.add('list-group', 'mb-5')
   feeds.forEach((feed) => {
@@ -61,17 +61,17 @@ const renderFeeds = (container, feeds) => {
   container.append(title, list)
 }
 
-const renderPosts = (container, posts, viewedPostIds) => {
+const renderPosts = (container, posts, viewedPostIds, i18n) => {
   container.innerHTML = ''
   if (posts.length === 0) return
   const title = document.createElement('h2')
   title.classList.add('mb-4')
-  title.textContent = 'Посты'
+  title.textContent = i18n.t('posts.title')
   const list = document.createElement('ul')
   list.classList.add('list-group')
   posts.forEach((post) => {
     const isViewed = viewedPostIds.includes(post.id)
-    list.append(getPostItem(post, isViewed))
+    list.append(getPostItem(post, isViewed, i18n))
   })
   container.append(title, list)
 }
@@ -130,8 +130,8 @@ export default (state, elements, i18n) => {
   setupModalHandlers(state, postsContainer, elements)
   const render = () => {
     renderForm(state, elements, i18n)
-    renderFeeds(feedsContainer, state.feeds)
-    renderPosts(postsContainer, state.posts, state.ui.viewedPostIds)
+    renderFeeds(feedsContainer, state.feeds, i18n)
+    renderPosts(postsContainer, state.posts, state.ui.viewedPostIds, i18n)
     updateModal(state, elements)
   }
   render()

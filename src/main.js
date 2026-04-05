@@ -21,6 +21,13 @@ const elements = {
   modalFullArticleLink: document.querySelector('#modal .modal-footer a'),
 }
 
+const applyTranslations = (i18n) => {
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const key = element.getAttribute('data-i18n')
+    element.textContent = i18n.t(key)
+  })
+}
+
 const init = () => {
   const i18n = i18next.createInstance()
   i18n.init({
@@ -28,6 +35,7 @@ const init = () => {
     debug: false,
     resources,
   }).then(() => {
+    applyTranslations(i18n)
     view(state, elements, i18n)
     startAutoUpdate()
     const { handleSubmit } = createApp()

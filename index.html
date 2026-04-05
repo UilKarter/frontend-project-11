@@ -12,8 +12,8 @@
     <section class="container-fluid bg-dark p-5">
       <div class="row">
         <div class="col-md-10 col-lg-8 mx-auto text-white">
-          <h1 class="display-3 mb-0">RSS агрегатор</h1>
-          <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
+          <h1 class="display-3 mb-0" data-i18n="app.title">RSS агрегатор</h1>
+          <p class="lead" data-i18n="app.lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
           
           <form class="rss-form text-body" novalidate>
             <div class="row">
@@ -27,19 +27,19 @@
                     name="url" 
                     aria-label="url" 
                     class="form-control w-100" 
-                    placeholder="Ссылка RSS" 
+                    placeholder="Ссылка RSS"
                     autocomplete="off"
                   />
-                  <label for="url-input">Ссылка RSS</label>
+                  <label for="url-input" data-i18n="form.urlLabel">Ссылка RSS</label>
                 </div>
               </div>
               <div class="col-auto">
-                <button type="submit" aria-label="add" class="h-100 btn btn-lg btn-primary px-sm-5">Добавить</button>
+                <button type="submit" aria-label="add" class="h-100 btn btn-lg btn-primary px-sm-5" data-i18n="form.button">Добавить</button>
               </div>
             </div>
           </form>
           
-          <p class="mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
+          <p class="mt-2 mb-0 text-secondary" data-i18n="form.example">Пример: https://lorem-rss.hexlet.app/feed</p>
           <p class="feedback m-0 position-absolute small"></p>
         </div>
       </div>
@@ -74,8 +74,8 @@
         <p></p>
       </div>
       <div class="modal-footer">
-        <a href="#" target="_blank" class="btn btn-primary">Читать полностью</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <a href="#" target="_blank" class="btn btn-primary" data-i18n="posts.readFull">Читать полностью</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="posts.close">
           Закрыть
         </button>
       </div>

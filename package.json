@@ -4,7 +4,6 @@
   "description": "[![Actions Status](https://github.com/UilKarter/frontend-project-11/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/UilKarter/frontend-project-11/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -21,7 +20,9 @@
   "homepage": "https://github.com/UilKarter/frontend-project-11#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^25.5.2",
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
     "vite": "^8.0.3"
