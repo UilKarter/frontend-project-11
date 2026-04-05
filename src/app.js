@@ -1,56 +1,22 @@
 import axios from 'axios'
-import state from './state.js'
+import state from './utils/state.js'
 import buildSchema from './utils/validator.js'
-import parser from './parser.js'
+import parser from './utils/parser.js'
 import getId from './utils/getId.js'
-
-const normalizeUrl = value => value.trim()
-const getProxyUrl = () => 'https://allorigins.hexlet.app/get'
+import { normalizeUrl, getProxyUrl } from './utils/urlHandlers.js'
 
 const fetchRss = url => axios.get(getProxyUrl(), {
   params: { disableCache: true, url },
 })
 
-const updateFeeds = () => {
-  const promises = state.feeds.map(feed =>
-    fetchRss(feed.url)
-      .then(response => parser(response.data.contents))
-      .then((data) => {
-        const existingLinks = state.posts.map(post => post.link)
-
-        const newPosts = data.posts
-          .filter(post => !existingLinks.includes(post.link))
-          .map(post => ({
-            id: getId(),
-            feedId: feed.id,
-            title: post.title,
-            description: post.description,
-            link: post.link,
-          }))
-
-        if (newPosts.length > 0) {
-          state.posts.unshift(...newPosts)
-        }
-      })
-      .catch(() => {
-      }),
-  )
-
-  Promise.all(promises).finally(() => {
-    setTimeout(updateFeeds, 5000)
-  })
-}
-
 const addFeedWithPosts = (url, feedData) => {
   const feedId = getId()
-
   state.feeds.unshift({
     id: feedId,
     url,
     title: feedData.feed.title,
     description: feedData.feed.description,
   })
-
   const posts = feedData.posts.map(post => ({
     id: getId(),
     feedId,
@@ -58,45 +24,30 @@ const addFeedWithPosts = (url, feedData) => {
     description: post.description,
     link: post.link,
   }))
-
   state.posts.unshift(...posts)
 }
 
 const getErrorKey = (error) => {
-  if (error?.message?.startsWith('errors.')) {
-    return error.message
-  }
-
-  if (axios.isAxiosError(error)) {
-    return 'errors.network'
-  }
-
+  if (error?.message?.startsWith('errors.')) return error.message
+  if (axios.isAxiosError(error)) return 'errors.network'
   return 'errors.unknown'
 }
 
 export default () => {
   const validate = (url) => {
-    const exUrls = state.feeds.map(feed => feed.url)
-    return buildSchema(exUrls).validate(url)
+    const existingUrls = state.feeds.map(feed => feed.url)
+    return buildSchema(existingUrls).validate(url)
   }
 
   const handleSubmit = (rawUrl) => {
-    const url = normalizeUrl(rawUrl)
-
     state.process.phase = 'loading'
     state.process.errorCode = null
-
-    let validatedUrl
-
+    const url = normalizeUrl(rawUrl)
     return validate(url)
-      .then((validUrl) => {
-        validatedUrl = validUrl
-        return fetchRss(validatedUrl)
-      })
+      .then(validatedUrl => fetchRss(validatedUrl))
       .then(response => parser(response.data.contents))
       .then((feedData) => {
-        addFeedWithPosts(validatedUrl, feedData)
-
+        addFeedWithPosts(url, feedData)
         state.process.phase = 'done'
       })
       .catch((error) => {
@@ -105,6 +56,6 @@ export default () => {
         throw error
       })
   }
-  updateFeeds()
+
   return { handleSubmit }
 }

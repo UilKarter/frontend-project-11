@@ -7,4 +7,8 @@ export default proxy({
   },
   feeds: [],
   posts: [],
+  ui: {
+    viewedPostIds: [],
+    modalPostId: null,
+  },
 })
