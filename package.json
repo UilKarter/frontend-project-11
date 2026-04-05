@@ -20,7 +20,6 @@
   "homepage": "https://github.com/UilKarter/frontend-project-11#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.59.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^25.5.2",
     "eslint": "^10.1.0",
